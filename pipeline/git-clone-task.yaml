@@ -1,0 +1,24 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: git-clone
+  namespace: sn-labs-bonillamigue
+spec:
+  params:
+    - name: url
+      description: The URL of the Git repository to clone
+      type: string
+    - name: revision
+      description: The Git revision to checkout (branch, tag, commit)
+      type: string
+      default: "main"
+  workspaces:
+    - name: output
+  steps:
+    - name: clone
+      image: alpine/git
+      script: |
+        #!/bin/sh
+        git clone $(params.url) $(workspaces.output.path)
+        cd $(workspaces.output.path)
+        git checkout $(params.revision)
