@@ -1,0 +1,11 @@
+apiVersion: tekton.dev/v1beta1
+   kind: PipelineRun
+   metadata:
+     name: new-pipeline-12isn9
+   spec:
+     pipelineRef:
+       name: new-pipeline-12isn9
+     workspaces:
+       - name: output
+         persistentVolumeClaim:
+           claimName: oc-lab-pvc
